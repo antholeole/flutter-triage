@@ -3,46 +3,45 @@ import 'package:flutter/rendering.dart';
 
 // relay a followers transform to a [relayTo]. Useful so we don't have to
 // adjust a transform. Hopefully this works 😅
-class FollowerPositionRelayerWithOverflowSafety
+class AnimatedCompositedTransformFollowerWithSafeArea
     extends MultiChildRenderObjectWidget {
-  final Widget relayPosition;
+  final Widget child;
+  final Offset offset;
 
-  final Offset additionalOffset;
-
-  FollowerPositionRelayerWithOverflowSafety(
+  AnimatedCompositedTransformFollowerWithSafeArea(
       {super.key,
       required LayerLink link,
-      required this.relayPosition,
-      this.additionalOffset = Offset.zero})
+      required this.child,
+      this.offset = Offset.zero})
       //order here matters: follower needs to come first or else!!!!!!!
       : super(children: [
           CompositedTransformFollower(
             link: link,
           ),
-          relayPosition
+          child //wrap me with inhereted?
         ]);
 
   @override
   RenderObject createRenderObject(BuildContext context) {
-    return RenderFollowerPositionRelayer(
-        additionalOffset, MediaQuery.of(context).size);
+    return RenderAnimatedCompositedTransformFollowerWithSafeArea(
+        offset, MediaQuery.of(context).size);
   }
 
   @override
   RenderObject updateRenderObject(
-      BuildContext context, RenderFollowerPositionRelayer renderObject) {
+      BuildContext context, RenderAnimatedCompositedTransformFollowerWithSafeArea renderObject) {
     return renderObject
       ..windowSize = MediaQuery.of(context).size
-      ..additionalOffset = additionalOffset;
+      ..additionalOffset = offset;
   }
 }
 
 /// MUST have the first child be a CompositedTransformFollower,
 /// followed by an arbitrary second child that will be positioned at
 /// the position of compositedTransformFollower.
-class RenderFollowerPositionRelayer extends RenderBox
+class RenderAnimatedCompositedTransformFollowerWithSafeArea extends RenderBox
     with ContainerRenderObjectMixin<RenderBox, StackParentData> {
-  RenderFollowerPositionRelayer(this._additionalOffset, this._windowSize);
+  RenderAnimatedCompositedTransformFollowerWithSafeArea(this._additionalOffset, this._windowSize);
 
   Size get windowSize => _windowSize;
   Size _windowSize;
@@ -102,7 +101,8 @@ class RenderFollowerPositionRelayer extends RenderBox
     final Offset adjustedSecondChildPosition = Offset(
       unadjustedSecondChildPosition.dx
           .clamp(0, windowSize.width - secondChildSize.width),
-      unadjustedSecondChildPosition.dy,
+      unadjustedSecondChildPosition.dy
+          .clamp(0, windowSize.height - secondChildSize.height),
     );
 
     if (layer == null) {

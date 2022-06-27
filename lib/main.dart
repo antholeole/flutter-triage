@@ -44,10 +44,10 @@ class MyApp extends StatelessWidget {
           );
         },
       ),
-      FollowerPositionRelayerWithOverflowSafety(
-        additionalOffset: magnificationOffset,
+      AnimatedCompositedTransformFollowerWithSafeArea(
+        offset: magnificationOffset,
         link: loupeLink,
-        relayPosition: Loupe(
+        child: Loupe(
         magnificationScale: 1.2,
         offset: magnificationOffset,
         shadowColor: Colors.black,
