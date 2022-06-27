@@ -1,6 +1,5 @@
 import 'package:bug/follower_position_relayer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 
 void main() {
   runApp(MaterialApp(home: Scaffold(body: MyApp())));
@@ -8,9 +7,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final loupeLink = LayerLink();
-
-  final textController =
-      TextEditingController(text: lorem(words: 100, paragraphs: 1));
 
   MyApp({super.key});
 
