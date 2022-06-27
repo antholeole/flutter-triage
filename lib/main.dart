@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       ),
       FollowerPositionRelayerWithOverflowSafety(
         additionalOffset: magnificationOffset,
-        follower: CompositedTransformFollower(link: loupeLink),
+        link: loupeLink,
         relayPosition: Loupe(
         magnificationScale: 1.2,
         offset: magnificationOffset,
