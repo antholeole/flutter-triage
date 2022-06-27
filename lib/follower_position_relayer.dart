@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 
-// relay a followers transform to a [relayTo]. Useful so we don't have to
-// adjust a transform. Hopefully this works 😅
 class AnimatedCompositedTransformFollowerWithSafeArea
     extends MultiChildRenderObjectWidget {
   final Widget child;
