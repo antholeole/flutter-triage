@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     Offset mousePos = Offset.zero;
 
     return Stack(children: [
@@ -44,15 +43,7 @@ class MyApp extends StatelessWidget {
       AnimatedCompositedTransformFollowerWithSafeArea(
         offset: Offset.zero,
         link: loupeLink,
-        child: Loupe(
-        magnificationScale: 1.2,
-        offset: Offset.zero,
-        shadowColor: Colors.black,
-        size: const Size(100, 100),
-        border: Border.all(
-            color: Colors.pink, width: 2, strokeAlign: StrokeAlign.center),
-        elevation: 12,
-      ),
+        child: Container(color: Colors.red, width: 100, height: 100,),
       ),
     ]);
   }
