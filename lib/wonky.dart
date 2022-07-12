@@ -1,4 +1,5 @@
 
+/*
 class FilterCompositedFollowerPotentialBug extends StatelessWidget {
   static const Size lensSize = Size(200, 50);
   static const above = 40;
@@ -92,3 +93,5 @@ class FilterCompositedFollowerPotentialBug extends StatelessWidget {
     );
   }
 }
+
+*/
